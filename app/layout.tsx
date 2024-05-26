@@ -1,8 +1,23 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Kanit } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const kanit = Kanit({ weight: ["300"], subsets: ["latin"] });
+
+import Image from "next/image";
+import crepebiteslogo from "@/public/crepebiteslogo.jpg";
+
+import { LogIn } from "lucide-react";
+import { Copyright } from "lucide-react";
+import { SidebarClose } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+
+import MenuToggle from "./(site)/components/menu-toggle";
+import Menu from "./(site)/components/menu";
+
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +29,84 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const routes = [
+    {
+      text: "Order",
+      href: "/order",
+    },
+    {
+      text: "Redeem",
+      href: "/redeem",
+    },
+    {
+      text: "Blog",
+      href: "/blog",
+    },
+    {
+      text: "Terms",
+      href: "/terms",
+    },
+    {
+      text: "Contact",
+      href: "/contact",
+    },
+    {
+      text: "About",
+      href: "/about",
+    },
+  ];
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={kanit.className}>
+        <header className="flex items-center gap-3 justify-between px-10 w-screen fixed h-16 z-50 bg-navy shadow-2xl">
+          <section className="flex items-center gap-6">
+            <Link
+              href="/"
+              className="text-xl bg-gradient-to-tr from-amber-200 to-yellow-500 bg-clip-text text-transparent font-semibold"
+            >
+              Crepe Bites
+            </Link>
+            <ul className="md:flex gap-3 hidden ">
+              {routes.map((route) => (
+                <Link
+                  href={route.href}
+                  key={route.text}
+                  className="text-neutral-500"
+                >
+                  {route.text}
+                </Link>
+              ))}
+            </ul>
+          </section>
+          <button className="hidden md:flex items-center gap-3 bg-gradient-to-tr from-amber-200 to-yellow-500 text-[#161821] py-1 px-6 font-semibold">
+            <LogIn className="w-4" />
+            Log In
+          </button>
+          <MenuToggle />
+        </header>
+        <Menu />
+        {children}
+        <footer className="py-5 bg-navy text-yellow-400 flex flex-col gap-6 items-center text-sm">
+          <Image
+            src={crepebiteslogo}
+            alt="crepebiteslogo"
+            className="rounded-full w-20"
+          />
+          <div className="flex flex-col items-center">
+            <p className="text-2xl font-semibold">Crepe Bites</p>
+            <small className="underline">crepebites@gmail.com</small>
+            <p className="text-yellow-700 text-center">
+              From simple beginnings, to innovation shine, on a journey to
+              betterment.
+            </p>
+          </div>
+          <div className="flex gap-3 text-sm items-center">
+            <Copyright />
+            <p>2024 Crepe Bites. All rights reserved.</p>
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }
