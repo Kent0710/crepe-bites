@@ -5,6 +5,7 @@ import { Argon2id } from "oslo/password";
 import { cookies } from "next/headers";
 import { lucia } from "@/lib/lucia";
 import { redirect } from "next/navigation";
+import { ActionResult } from "@/lib/form";
 
 export default async function signup(_: any, formData: FormData): Promise<ActionResult> {
     "use server";
