@@ -1,9 +1,13 @@
 import { validateRequest } from "@/lib/lucia";
+import { redirect } from "next/navigation";
 
 import { Suspense } from "react";
 
 export default async function InboxPage() {
   const { user } = await validateRequest();
+  if (!user) {
+    return redirect("/signUp");
+  }
 
   return (
     <div className="flex flex-col items-center pt-20 py-5 md:px-36  text-sm text-chocolate">
@@ -21,16 +25,16 @@ export default async function InboxPage() {
               <th>Time</th>
             </tr>
           </thead>
-          <Suspense fallback={<p>fetching daata</p>}>
-            <tbody>
-              {user?.inbox.map((message: any) => (
+          <tbody>
+            <Suspense fallback={<p>fetching daata</p>}>
+              {user.inbox?.map((message: any) => (
                 <tr key={message.id} className="text-center ">
                   <td className="truncate">{message.content}</td>
                   <td>{message.date.toString()}</td>
                 </tr>
               ))}
-            </tbody>
-          </Suspense>
+            </Suspense>
+          </tbody>
         </table>
       </div>
     </div>
