@@ -1,6 +1,6 @@
 import { bytesToInteger } from ".././node_modules/.pnpm/oslo@1.2.0/node_modules/oslo/dist/bytes";
 
-export function generateRandomInteger(max) {
+export function generateRandomInteger(max : any) {
   if (max < 0 || !Number.isInteger(max)) {
     throw new Error(
       "Argument 'max' must be an integer greater than or equal to 0"
@@ -25,17 +25,17 @@ export function generateRandomInteger(max) {
   }
   return result;
 }
-export function generateRandomString(length, alphabet) {
+export function generateRandomString(length:any, alphabet:any) {
   let result = "";
   for (let i = 0; i < length; i++) {
     result += alphabet[generateRandomInteger(alphabet.length)];
   }
   return result;
 }
-export function alphabet(...patterns) {
+export function alphabet(...patterns: any[]) {
   const patternSet = new Set(patterns);
   let result = "";
-  for (const pattern of patternSet) {
+  for (const pattern of Array.from(patternSet)) {
     if (pattern === "a-z") {
       result += "abcdefghijklmnopqrstuvwxyz";
     } else if (pattern === "A-Z") {
@@ -49,12 +49,12 @@ export function alphabet(...patterns) {
   return result;
 }
 
-export function convertToReadableDate(isoDateString) {
+export function convertToReadableDate(isoDateString: any) {
   // Parse the ISO-8601 string into a Date object
   const date = new Date(isoDateString);
 
   // Options for formatting the date
-  const options = {
+  const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -65,7 +65,7 @@ export function convertToReadableDate(isoDateString) {
   };
 
   // Format the date to a readable string
-  const readableDate = date.toLocaleDateString("en-ph", options);
+  const readableDate = date.toLocaleDateString("en-PH", options);
 
   return readableDate;
 }
@@ -74,8 +74,8 @@ export function checkIf15MinutesHavePassed(codeExpiration: Date) {
   const datenow = new Date();
 
   // Calculate the difference in milliseconds
-  const timeDifference = datenow - new Date(codeExpiration);
-
+  const timeDifference = datenow.getTime() - codeExpiration.getTime();
+  
   // Convert the difference from milliseconds to minutes
   const differenceInMinutes = timeDifference / (1000 * 60);
 
