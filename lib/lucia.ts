@@ -12,9 +12,6 @@ const adapter = new PrismaAdapter(client.session, client.user)
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		expires : false,
-		attributes: {
-			secure: true
-		}
 	},
 	getUserAttributes: (attributes) => {
 		return {
