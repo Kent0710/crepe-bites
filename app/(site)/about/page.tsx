@@ -1,7 +1,13 @@
+import paulImage from "@/public/paul.png"
+
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import crepebiteslogo from "@/public/crepebiteslogo.jpg";
-import paul from "@/public/paul.png";
+import paul from "@/public/paulImage.png"
+import feah from "@/public/feahImage.png"
+import kent from "@/public/kentImage.png"
+import ben from "@/public/benImage.png"
+import wazu from "@/public/wazuImage.png"
 
 import { ChevronRight } from "lucide-react";
 import { Mail } from "lucide-react";
@@ -17,7 +23,7 @@ export default async function AboutPage() {
 
   return (
     <div className="flex flex-col items-center pt-20 py-5 md:px-36  text-sm text-chocolate">
-      <div className="flex flex-col gap-6 p-10 shadow-lg w-full">
+      <div className="flex flex-col gap-6 p-10 w-full">
         <section>
           <h1 className="font-semibold text-2xl">About Us</h1>
           <p>
@@ -252,8 +258,8 @@ const OrganizationalStructure = () => {
       <p>Get to know the team behind Crepe Bites.</p>
       <div className="px-5 flex flex-col gap-3">
         <OrganizationalStructureItem
-          src={paul}
-          alt="paulImage"
+          src={kent}
+          alt="kent"
           position="Operation Manager"
           name="Christian Kent Bayani"
           email="crepebitesoperationmanager@gmail.com"
@@ -261,31 +267,31 @@ const OrganizationalStructure = () => {
         />
         <OrganizationalStructureItem
           src={paul}
-          alt="paulImage"
+          alt="paul"
           position="Planning Head"
           name="Paul Aaron Luisro"
           email="crepebitesplanninghead@gmail.com"
           description="Decide how to use the available resources to implement the plans."
         />
         <OrganizationalStructureItem
-          src={paul}
-          alt="paulImage"
+          src={wazu}
+          alt="wazu"
           position="Production Head"
           name="Chan Wade Zeus"
           email="crepebitesproductionhead@gmail.com"
           description="Make sure the manufacturing or assembly of products is running smoothly."
         />
         <OrganizationalStructureItem
-          src={paul}
-          alt="paulImage"
+          src={ben}
+          alt="ben"
           position="Sales and Marketing Head"
           name="Ken Benedict Mallari"
           email="crepebitessalesandmarketing@gmail.com"
           description="Creates plans and strategies to promote the company product."
         />
         <OrganizationalStructureItem
-          src={paul}
-          alt="paulImage"
+          src={feah}
+          alt="feah"
           position="Finance Head"
           name="Feah Rose Gonzales"
           email="crepebitesfinancehead@gmail.com"
@@ -310,7 +316,7 @@ const OrganizationalStructureItem: React.FC<
 > = ({ src, alt, position, name, email, description }) => {
   return (
     <div className="flex gap-3 items-center hover:bg-neutral-200 rounded-md flex-wrap">
-      <Image src={src} alt={alt} className="w-[10rem] rounded-md shadow-lg" />
+      <Image src={src} alt={alt} className="rounded-md shadow-lg" width={100}/>
       <section className="flex flex-col gap-3">
         <div>
           <p>{position}</p>

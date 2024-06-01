@@ -4,11 +4,17 @@ import Link from "next/link";
 
 import { SidebarClose } from "lucide-react";
 import { ChevronRight } from "lucide-react";
-import { LogIn } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
+import { TicketCheck } from "lucide-react";
+import { PencilLine } from "lucide-react";
+import { Handshake } from "lucide-react";
+import { Phone } from "lucide-react";
+import { Building2 } from "lucide-react";
+import { History } from "lucide-react";
+import { Inbox } from "lucide-react";
 
 import { useIsMenuOpen } from "@/hooks/useMenu";
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 const Menu = () => {
@@ -16,26 +22,37 @@ const Menu = () => {
     {
       text: "Order",
       href: "/order",
+      icon: ShoppingCart,
     },
     {
       text: "Redeem",
       href: "/redeem",
+      icon: TicketCheck,
     },
     {
-      text: "Blog",
-      href: "/blog",
+      text: "History",
+      href: "/history",
+      icon: History,
+    },
+    {
+      text: "Inbox",
+      href: "/inbox",
+      icon: Inbox,
     },
     {
       text: "Terms",
       href: "/terms",
+      icon: Handshake,
     },
     {
       text: "Contact",
       href: "/contact",
+      icon: Phone,
     },
     {
       text: "About",
       href: "/about",
+      icon: Building2,
     },
   ];
 
@@ -47,7 +64,6 @@ const Menu = () => {
     console.log("Pathname changed:", pathname);
     setIsMenuOpen(false);
   }, [pathname, setIsMenuOpen]);
-
 
   useEffect(() => {
     const htmlElement = document.documentElement;
@@ -72,31 +88,47 @@ const Menu = () => {
   return (
     <section className="fixed bg-navy h-screen z-50 w-screen p-5 flex flex-col gap-6 text-white md:hidden">
       <section className="flex items-center justify-between">
-        <h1
-          onClick={() => console.log(pathname)}
+        <Link
+          href="/"
           className="text-xl bg-gradient-to-tr from-amber-200 to-yellow-500 bg-clip-text text-transparent font-semibold"
         >
           Crepe Bites
-        </h1>
+        </Link>
         <SidebarClose className="w-8" onClick={() => setIsMenuOpen(false)} />
       </section>
-      <ul className="flex flex-col gap-6 border-t-2 border-yellow-400 pt-6">
+      <ul className="flex flex-col gap-9 border-t-2 border-yellow-400 pt-6">
         {routes.map((route) => (
-          <Link
-            href={route.href}
+          <MenuItem
             key={route.text}
-            className="flex w-full justify-between text-neutral-400"
-          >
-            {route.text}
-            <ChevronRight className="w-4" />
-          </Link>
+            href={route.href}
+            text={route.text}
+            icon={route.icon}
+          />
         ))}
       </ul>
-      <button className="flex justify-center items-center gap-3 bg-gradient-to-tr from-amber-200 to-yellow-500 text-[#161821] py-1 px-6 font-semibold">
-        <LogIn className="w-4" />
-        Log In
-      </button>
     </section>
+  );
+};
+
+interface MenuItemProps {
+  text: string;
+  icon: any;
+  href: string;
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({ text, icon: Icon, href }) => {
+  return (
+    <Link
+      href={href}
+      key={text}
+      className="flex w-full items-center justify-between text-neutral-300"
+    >
+      <section className="flex gap-3 items-center">
+      <Icon size={20} />
+      {text}
+      </section>
+      <ChevronRight className="w-4" />
+    </Link>
   );
 };
 

@@ -4,8 +4,11 @@
 
 import Image from "next/image";
 import crepebitesbackdrop from "@/public/crepebitesbackdrop.jpg";
-import blogimage from "@/public/blogimage.jpg";
-import paulImage from "@/public/paul.png";
+import crepebiteslogo from "@/public/crepebiteslogo.jpg";
+import conceptImage from "@/public/conceptimage.png"
+import goalImage from "@/public/goalImage.png"
+import teamImage from "@/public/teamImage.png"
+import kentImage from "@/public/kentImage.png"
 
 import { LogIn } from "lucide-react";
 import { Facebook } from "lucide-react";
@@ -17,18 +20,24 @@ import { MousePointerClick } from "lucide-react";
 import { HandCoins } from "lucide-react";
 import { Github } from "lucide-react";
 import { Send } from "lucide-react";
-import { PencilLine } from "lucide-react";
 import { CheckCheck } from "lucide-react";
 import { Cross } from "lucide-react";
 import { Smile } from "lucide-react";
+import { Copyright } from "lucide-react";
 
 import Link from "next/link";
 
-const images = Array.from({ length: 10 });
+import { Suspense } from "react";
+
+import { Form } from "@/lib/form";
+import { ActionResult } from "@/lib/form";
+import { validateRequest } from "@/lib/lucia";
 
 export default async function App() {
+  const { user } = await validateRequest();
+
   return (
-    <>
+    <Suspense fallback={<p>loading</p>}>
       <div className="flex flex-col gap-6 items-center text-white bg-[#161821] h-fit py-6 pt-24 text-sm shadow-2xl">
         <section className="px-10 flex justify-center items-center pb-14 h-fit gap-14 md:gap-24 flex-wrap shadow-2xl shadow-black">
           <section>
@@ -48,7 +57,7 @@ export default async function App() {
               <br /> Crepe for
               <span className="text-yellow-300 font-semibold drop-shadow-glow">
                 {" "}
-                Keepings
+                Everybody
               </span>
               .
             </h1>
@@ -71,7 +80,7 @@ export default async function App() {
           <Image
             src={crepebitesbackdrop}
             alt="crepebitesbackdrop"
-            className="w-[30rem]"
+            width={500}
           />
         </section>
         <div className="flex items-center gap-3 px-10 text-neutral-400 justify-between w-screen">
@@ -93,27 +102,36 @@ export default async function App() {
             <p className="text-center">Click on each step to proceed.</p>
           </section>
           <section className="flex items-center gap-6 flex-wrap justify-center">
-            <div className="bg-navy shadow-2xl text-yellow-400 flex flex-col gap-3 items-center  p-10 bg-opacity-90  w-72">
+            <Link
+              href="/signUp"
+              className="bg-navy shadow-2xl text-yellow-400 flex flex-col gap-3 items-center  p-10 bg-opacity-90  w-72"
+            >
               <p className="absolute text-7xl place-self-start opacity-20 p-10 px-12 border-4 border-neutral-600  rounded-full">
                 01
               </p>
               <LogIn size={60} />
               <p>Create an account</p>
-            </div>
-            <div className=" bg-navy shadow-2xl text-yellow-400 0 flex flex-col gap-3 items-center  p-10 bg-opacity-90  w-72">
+            </Link>
+            <Link
+              href="/order"
+              className=" bg-navy shadow-2xl text-yellow-400 0 flex flex-col gap-3 items-center  p-10 bg-opacity-90  w-72"
+            >
               <p className="absolute text-7xl place-self-center opacity-20 p-10 border-4 border-neutral-600 rounded-full">
                 02
               </p>
               <ShoppingCart size={60} />
               <p>Place an order</p>
-            </div>
-            <div className="bg-navy shadow-2xl text-yellow-400  flex flex-col gap-3 items-center bg-opacity-90  p-10 w-72">
+            </Link>
+            <Link
+              href="/order"
+              className="bg-navy shadow-2xl text-yellow-400  flex flex-col gap-3 items-center bg-opacity-90  p-10 w-72"
+            >
               <p className="absolute text-7xl place-self-end opacity-20  p-10 border-4 border-neutral-600 rounded-full">
                 03
               </p>
               <Box size={60} />
               <p>Claim at the venue</p>
-            </div>
+            </Link>
           </section>
         </div>
         <div className="px-10 flex flex-col gap-12">
@@ -122,56 +140,48 @@ export default async function App() {
           </h4>
           <div className="flex flex-wrap gap-9 lg:gap-24 justify-center">
             <section className="w-80 flex flex-col gap-3 items-center">
-              <Image src={blogimage} alt="blogimage" className="w-full" />
+              <Image src={conceptImage} alt="conceptImage" width={300} />
               <section>
                 <h4 className="text-2xl font-semibold">Our concept</h4>
                 <p className="text-justify">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  At Crepe Bites, we introduce Fruipé: a delicious and
+                  convenient mango crepe snack infused with malunggay for a
+                  healthy twist. Each bite combines sweet mango jam and a touch
+                  of chocolate syrup, creating a delightful, on-the-go treat
+                  that satisfies your cravings without breaking the bank.
                 </p>
               </section>
             </section>
             <section className="w-80 flex flex-col gap-3 items-center">
-              <Image src={blogimage} alt="blogimage" className="w-full" />
+              <Image src={goalImage} alt="goalImage"  width={300} />
               <section>
-                <h4 className="text-2xl font-semibold">Our concept</h4>
+                <h4 className="text-2xl font-semibold">Our goal</h4>
                 <p className="text-justify">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  Our goal is to produce and market delicious crepes, make it accessible and
+                  affordable to everyone. We aim to bring the joy of sweet and
+                  healthy treats to the community, creating a new standard in
+                  the dessert market with our innovative, affordable and tasty creations.
                 </p>
               </section>
             </section>
             <section className="w-80 flex flex-col gap-3 items-center">
-              <Image src={blogimage} alt="blogimage" className="w-full" />
+              <Image src={teamImage} alt="teamImage"  width={300} />
               <section>
-                <h4 className="text-2xl font-semibold">Our concept</h4>
+                <h4 className="text-2xl font-semibold">Our team</h4>
                 <p className="text-justify">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  Crepe Bites is brought to you by a passionate group of
+                  students Grade 11 STEM-2301 class. Christian Kent Bayani, Wade
+                  Zeus Chan, Feah Rose Gonzales, Paul Aaron Luistro, and Ken
+                  Benedict Mallari work together to create and deliver our
+                  unique and delicious Fruipé treats.
                 </p>
               </section>
             </section>
           </div>
         </div>
-
+        <h4 className="font-semibold text-xl text-navy text-center animate-bounce">
+          Especially made, just for you.
+        </h4>
         <div className="flex flex-col gap-9 px-10 md:px-20 py-10 bg-navy text-yellow-400">
           <section>
             <h4 className="font-semibold text-3xl">Our Focus</h4>
@@ -181,103 +191,11 @@ export default async function App() {
             </p>
           </section>
           <ul className="flex justify-center gap-6 md:gap-14 flex-wrap">
-            <UniqueFeatureItem icon={HandCoins} />
-            <UniqueFeatureItem icon={CheckCheck} />
-            <UniqueFeatureItem icon={Cross} />
-            <UniqueFeatureItem icon={Smile} />
+            <UniqueFeatureItem icon={HandCoins} title="Ready to go" description="Whether you are rushing to catch the bus or simply need a quick pick-me-up, our crepes are the perfect on-the-go snack." />
+            <UniqueFeatureItem icon={CheckCheck} title="Affordable" description="We have made it our mission to keep our crepes affordable without compromising on quality or taste."/>
+            <UniqueFeatureItem icon={Cross} title="Sweetness" description="Each ingredient is thoughtfully selected and combined to create a harmonious blend of flavors and balanced sweetness." />
+            <UniqueFeatureItem icon={Smile} title="Healthy" description="From the malunggay leaves to the freshly made fruit jam filling, our crepes is designed to satisfy your health and cravings." />
           </ul>
-        </div>
-        <h4 className="font-semibold text-xl text-navy text-center animate-bounce">
-          Especially made, just for you.
-        </h4>
-        <div className="flex flex-col gap-9 px-10">
-          <h4 className="text-7xl opacity-50 pl-9 border-l-8 border-yellow-800">
-            The Gallery
-          </h4>
-          <section className="flex gap-6 overflow-x-auto">
-            {images.map((_, index) => (
-              <Image
-                key={index} // Add a key to each element for unique identification
-                src={crepebitesbackdrop}
-                alt="crepebitesbackdrop"
-                className="w-40"
-              />
-            ))}
-          </section>
-        </div>
-        <div className="flex flex-col gap-9 bg-chocolate px-10  w-full text-white py-10">
-          <section>
-            <h4 className="font-semibold text-3xl">
-              Community through delights
-            </h4>
-            <p className="text-neutral-400">
-              Capture amazing moments anywhere and anytime with Crepe Bites.
-            </p>
-          </section>
-          <ul className="flex gap-6 overflow-x-auto z-10">
-            <li className="flex gap-3 items-center">
-              <Image
-                src={blogimage}
-                alt="blogimage"
-                className="rounded-t-md w-40"
-              />
-              <section className="w-72">
-                <h4 className="font-semibold">
-                  Discover the Delight of Crepe Bites
-                </h4>
-                <p className="text-neutral-400">Indulge in the...</p>
-              </section>
-            </li>
-            <li className="flex gap-3 items-center">
-              <Image
-                src={blogimage}
-                alt="blogimage"
-                className="rounded-t-md w-40"
-              />
-              <section className="w-72">
-                <h4 className="font-semibold">
-                  Discover the Delight of Crepe Bites
-                </h4>
-                <p className="text-neutral-400">Indulge in the...</p>
-              </section>
-            </li>
-            <li className="flex gap-3 items-center">
-              <Image
-                src={blogimage}
-                alt="blogimage"
-                className="rounded-t-md w-40"
-              />
-              <section className="w-72">
-                <h4 className="font-semibold">
-                  Discover the Delight of Crepe Bites
-                </h4>
-                <p className="text-neutral-400">Indulge in the...</p>
-              </section>
-            </li>
-            <li className="flex gap-3 items-center">
-              <Image
-                src={blogimage}
-                alt="blogimage"
-                className="rounded-t-md w-40"
-              />
-              <section className="w-72">
-                <h4 className="font-semibold">
-                  Discover the Delight of Crepe Bites
-                </h4>
-                <p className="text-neutral-400">Indulge in the...</p>
-              </section>
-            </li>
-          </ul>
-          <h4 className="absolute text-[10rem] mt-20 rotate-90 opacity-20">
-            Build
-          </h4>
-          <Link
-            href="/blog"
-            className="border-2 border-white py-2 w-full flex justify-center items-center gap-3"
-          >
-            <PencilLine className="w-4 shrink-0" />
-            See our blog page.
-          </Link>
         </div>
         <div className="px-36 flex flex-col gap-6">
           <h4 className="font-semibold text-2xl text-center md:place-self-start">
@@ -285,15 +203,16 @@ export default async function App() {
           </h4>
           <div className="flex items-center gap-9 flex-wrap justify-center">
             <Image
-              src={paulImage}
+              src={kentImage}
               alt="paulImage"
-              className="rounded-md shadow-lg w-72 md:w-60 shrink-0"
+              className="rounded-md shadow-lg"
+              width={200}
             />
             <div className="flex flex-col gap-3 md:w-[60%]">
               <div className="flex gap-3 items-center">
                 <Github size={30} />
                 <section>
-                  <h4 className="text-xl font-semibold">Namikazii Nakiri</h4>
+                  <h4 className="text-xl font-semibold">Christian Kent Bayani</h4>
                   <p className="underline">https://github.com/Kent0710</p>
                 </section>
               </div>
@@ -312,45 +231,90 @@ export default async function App() {
             </div>
           </div>
         </div>
-        <form className="px-14 md:px-80 bg-neutral-200 py-10 flex flex-col gap-3">
-          <h4 className="text-xl font-semibold">Chat with us</h4>
+        <Form
+          className="flex flex-col gap-3 px-[3rem] md:px-[15rem] pb-14"
+          action={async (
+            prevState: any,
+            formData: FormData
+          ): Promise<ActionResult> => {
+            "use server";
+            const sendMessageServerAction = (
+              await import("../../actions/send-message")
+            ).default;
+            return await sendMessageServerAction(prevState, user?.id, formData);
+          }}
+        >
+          <section>
+            <h4 className="text-xl font-semibold">Chat with us</h4>
+            <p>Reach out for any concerns.</p>
+          </section>
           <div className="flex flex-col gap-1">
-            <p className="font-semibold opacity-80">Name</p>
-            <input
-              type="text"
-              className="w-full px-4 py-2 rounded-md focus:outline-none"
+            <p className="font-semibold opacity-80">
+              Content{" "}
+              <span className="font-normal italic">
+                (minimum of 10 characters and maximum of 100 characters)
+              </span>{" "}
+            </p>
+            <textarea
+              required={true}
+              maxLength={100}
+              minLength={10}
+              id="content"
+              name="content"
+              className="resize-none w-full px-4 py-2 rounded-md focus:outline-none"
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <p className="font-semibold opacity-80">Content</p>
-            <textarea className="resize-none w-full px-4 py-2 rounded-md focus:outline-none" />
-          </div>
-          <button className="flex w-full justify-center items-center font-semibold gap-3 bg-yellow-400 text-navy  px-10 py-2">
+          <button
+            type="submit"
+            className="flex w-full justify-center items-center font-semibold gap-3 bg-yellow-400 text-navy  px-10 py-2"
+          >
             <Send className="w-4" />
             Send form
           </button>
-        </form>
+        </Form>
       </div>
-    </>
+      <footer className="py-5 bg-navy text-yellow-400 flex flex-col gap-6 items-center text-sm">
+        <Image
+          src={crepebiteslogo}
+          alt="crepebiteslogo"
+          className="rounded-full w-20"
+        />
+        <div className="flex flex-col items-center">
+          <p className="text-2xl font-semibold">Crepe Bites</p>
+          <small className="underline">crepebites@gmail.com</small>
+          <p className="text-yellow-700 text-center">
+            From simple beginnings, to innovation shine, on a journey to
+            betterment.
+          </p>
+        </div>
+        <div className="flex gap-3 text-sm items-center">
+          <Copyright />
+          <p>2024 Crepe Bites. All rights reserved.</p>
+        </div>
+      </footer>
+    </Suspense>
   );
 }
 
 interface UniqueFeatureItemProps {
   icon: any;
+  title : string;
+  description : string;
 }
 
 const UniqueFeatureItem: React.FC<UniqueFeatureItemProps> = ({
   icon: Icon,
+  title,
+  description
 }) => {
   return (
     <li className="items-center border-2 border-white text-white px-10 p-5 w-60">
       <section className="flex gap-3 items-center">
         <Icon className="text-yellow-400 w-[15rem] h-[15rem] absolute opacity-20" />
-        <p className="text-lg font-semibold text-yellow-400">Affordability</p>
+        <p className="text-lg font-semibold text-yellow-400"> {title} </p>
       </section>
       <p className="text-justify">
-        At Crepes Bites, we believe that everyone deserves to enjoy delicious
-        treats without breaking the bank.
+        {description}
       </p>
     </li>
   );

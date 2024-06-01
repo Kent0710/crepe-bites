@@ -18,7 +18,7 @@ export default async function TermsPage() {
 
   return (
     <div className="flex flex-col items-center pt-20 py-5 md:px-36  text-sm text-chocolate">
-      <div className="flex flex-col gap-6 p-10 shadow-lg w-full">
+      <div className="flex flex-col gap-6 p-10 w-full">
         <section>
           <h1 className="font-semibold text-2xl">Terms and Conditions</h1>
           <p>
@@ -78,7 +78,7 @@ const UseOfTheWebsite = () => {
       <p className="text-justify">
         You agree to use our website only for lawful purposes. You are
         prohibited from using our site in any way that could harm, disable, or
-        impair the site or interfere with any other party's use and enjoyment of
+        impair the site or interfere with any other party use and enjoyment of
         the site.
       </p>
     </TableOfContentsHeader>
@@ -151,7 +151,7 @@ const LimitationOfLiability = () => {
   return (
     <TableOfContentsHeader title="Limitation of Liability">
       <p className="text-justify">
-        Crepe Bites provides the website and its content on an "as-is" basis. We
+        Crepe Bites provides the website and its content on an as is basis. We
         do not warrant that the website will be error-free or uninterrupted. To
         the maximum extent permitted by law, we disclaim all warranties and
         liabilities for any damages arising from your use of the site.
