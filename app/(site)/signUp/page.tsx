@@ -52,13 +52,8 @@ export default async function SignUpPage() {
         <h4 className="text-xl font-semibold">How do we store your data?</h4>
         <p>
           We only store the username and password you have given us. No external
-          data is being saved in the website or in any third party systems.
-          Please take note that for every order, we will be asking for your{" "}
-          <span className="text-blue-500 font-semibold">email </span>
-          to verify that you are a human,{" "}
-          <span className="text-red-500 font-semibold">we will not </span> store
-          this email in our website or in any third party systems. For more
-          information, please refer to our{" "}
+          data is being saved in the website or in any third party systems. For
+          more information, please refer to our{" "}
           <span className="text-blue-500 underline">about </span>
           page or directly{" "}
           <span className="text-blue-500 underline">contact </span> us at Crepe
@@ -68,4 +63,3 @@ export default async function SignUpPage() {
     </div>
   );
 }
-

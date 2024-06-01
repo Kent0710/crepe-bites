@@ -45,7 +45,7 @@ export default async function RedeemPage() {
           >
             <section className="flex flex-col items-center">
               <h4 className="font-semibold text-xl">Enter code</h4>
-              <p>Please enter the ten characters code from your box.</p>
+              <p>Please enter the ten characters code from your box. Temporary code for testing is: AAAAAA</p>
             </section>
             <input
               required={true}
