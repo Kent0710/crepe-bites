@@ -54,7 +54,7 @@ export async function resendHandler(email : string, userId : string, codeExpirat
     revalidatePath("/order")
     
     const data = await resend.emails.send({
-      from: "Crepe Bites <crepebites@gmail.com>",
+      from: "Acme <onboarding@resend.dev>",
       to: [email],
       subject: "Your verification code is: " + code,
       react: EmailTemplate({ code: code }),
