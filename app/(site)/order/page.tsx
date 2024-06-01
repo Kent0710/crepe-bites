@@ -4,7 +4,6 @@ import crepebitesbackdrop from "@/public/crepebitesbackdrop.jpg";
 import { Suspense } from "react";8
 import { ShoppingCart } from "lucide-react";
 
-import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";8
 
 import { validateRequest } from "@/lib/lucia";
