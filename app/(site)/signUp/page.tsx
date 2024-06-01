@@ -1,11 +1,9 @@
 import Link from "next/link";
 
-import { CircleAlert } from "lucide-react";
-
 import client from "@/lib/db";
 import { Argon2id } from "oslo/password";
 import { cookies } from "next/headers";
-import { lucia, validateRequest } from "@/lib/lucia";
+import { lucia } from "@/lib/lucia";
 import { redirect } from "next/navigation";
 import { Form } from "@/lib/form";
 
@@ -119,11 +117,11 @@ async function signup(_: any, formData: FormData): Promise<ActionResult> {
 
     const session = await lucia.createSession(newUser.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
-    cookies().set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes
-    );
+    // cookies().set(
+    //   sessionCookie.name,
+    //   sessionCookie.value,
+    //   sessionCookie.attributes
+    // );
   } catch (e) {
     return {
       error: "An unknown error occurred.",
