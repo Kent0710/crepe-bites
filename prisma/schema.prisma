@@ -22,10 +22,6 @@ model User {
 
   codePoints Int
 
-  orderCode      String
-  codeAttempts   Int
-  codeExpiration DateTime
-
   inbox Message[]
 }
 
@@ -53,6 +49,7 @@ model Order {
   useCodePoints Boolean
 
   orderNumber Int @unique
+  section String
 
   userId String @db.ObjectId
   user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)

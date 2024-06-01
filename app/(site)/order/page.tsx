@@ -57,16 +57,15 @@ export default async function OrderPage() {
               <h4 className="text-xl font-semibold">Check out form</h4>
               <p>Please fill out this form with necessary information.</p>
             </section>
-          <EmailCode />
             <div className="flex flex-col gap-1">
-              <p className="font-semibold">Code</p>
+              <p className="font-semibold">Grade and Section</p>
               <input
                 type="text"
-                name="verificationCode"
+                name="section"
                 required={true}
-                id="verificationCode"
+                id="section"
                 className="border-2 border-neutral-200 px-4 py-2 focus:outline-none"
-                placeholder="youremail@gmail.com"
+                placeholder="your grade and section here"
               />
             </div>
             <div className="flex flex-col gap-1">

@@ -3,6 +3,8 @@
 import client from "@/lib/db";
 import { redirect } from "next/navigation";
 
+import { alphabet, generateRandomString } from "@/lib/utils";
+
 export default async function createInvoice(
   _: any,
   userId: string,
@@ -33,45 +35,11 @@ export default async function createInvoice(
       }
     }
 
-    // check wheter the attempt is valid
-    if (user.codeAttempts === 5) {
-      return {
-        error: "Attempts reached.",
-      };
-    }
-
-    // check if the verification code is the same
-    const rawVerificationCode = formData.get("verificationCode");
-    if (
-      typeof rawVerificationCode !== "string" ||
-      rawVerificationCode.length !== 6
-    ) {
-      return {
-        error: "Invalid verification code",
-      };
-    }
-
-    if (rawVerificationCode !== user.orderCode) {
-      const updateAttempts = await client.user.update({
-        where: {
-          id: userId,
-        },
-        data: {
-          codeAttempts: {
-            increment: 1,
-          },
-        },
-      });
-
-      return {
-        error: `Verification code is not the same. Attempts : ${updateAttempts.codeAttempts}`,
-      };
-    }
-
     // everything is good
     const rawFormData = {
       time: formData.get("orderDateTime"),
       message: formData.get("message") || "",
+      section : formData.get("section")
     };
 
     if (!rawFormData.time) {
@@ -80,36 +48,32 @@ export default async function createInvoice(
       };
     }
 
+    if (typeof rawFormData.section !== "string" || 
+      rawFormData.section === undefined || rawFormData.section === "" 
+    ) {
+      return {
+        error : "Invalid section"
+      }
+    }
+
     // format the date
     const currentDate = new Date().toISOString().split("T")[0];
     const isoDateTime = `${currentDate}T${rawFormData.time}:00Z`;
+
+    const orderNumber = generateRandomString(4,alphabet("0-9"));
 
     // create to the database
     newOrder = await client.order.create({
       data: {
         claimTime: isoDateTime,
         message: rawFormData.message.toString(),
-        orderNumber: 3,
+        section : rawFormData.section,
+        orderNumber: parseInt(orderNumber),
         userId: userId,
         useCodePoints: useCodePoints,
       },
     });
-
-    // clear everything
-    const clearOrderCode = await client.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        orderCode: "",
-        codeAttempts: 0,
-        codeExpiration: new Date(),
-      },
-    });
-
-    // everything succeeded, redirect
   } catch (e) {
-    console.log("Error on creating the invoice from the server: ", e);
     return {
       error:
         "Unknown error occured. Please see your history if the order succeeded. If not, please refresh the page and try again.",
