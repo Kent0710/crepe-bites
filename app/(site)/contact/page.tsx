@@ -5,8 +5,6 @@ import { Suspense } from "react";
 import { ActionResult, Form } from "@/lib/form";
 import { validateRequest } from "@/lib/lucia";
 
-import { Button } from "../components/button";
-
 export default async function ContactPage() {
   const {user} = await validateRequest();
   
@@ -80,7 +78,6 @@ export default async function ContactPage() {
           </div>
         </div>
       </div>
-      <Button text="thisButton" type="button"/>
     </Suspense>
   );
 }
