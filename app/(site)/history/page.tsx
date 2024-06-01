@@ -26,17 +26,17 @@ export default async function HistoryPage() {
               <th>Use Code Points</th>
             </tr>
           </thead>
-          <Suspense fallback={<p>fetching daata</p>}>
-            <tbody>
-              {user.order.map((order: any) => (
+          <tbody>
+            <Suspense fallback={<p>fetching daata</p>}>
+              {user.order?.map((order: any) => (
                 <tr key={order.id} className="text-center">
                   <td>{order.orderNumber}</td>
                   <td>{order.claimTime.toString()}</td>
                   <td>{order.useCodePoints.toString()}</td>
                 </tr>
               ))}
-            </tbody>
-          </Suspense>
+            </Suspense>
+          </tbody>
         </table>
       </div>
     </div>
