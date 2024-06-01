@@ -21,7 +21,7 @@ export default async function SignUpPage() {
               name="username"
               id="username"
               className="border-2 border-neutral-200 w-full px-4 py-2 focus:outline-none"
-              placeholder="4 characters and above. Text and numbers only. No spacing"
+              placeholder="4 characters and above. Lowercase only. Text and numbers only. No spacing"
             />
           </section>
           <section>
