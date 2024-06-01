@@ -115,8 +115,8 @@ async function signup(_: any, formData: FormData): Promise<ActionResult> {
       },
     });
 
-    const session = await lucia.createSession(newUser.id, {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
+    // const session = await lucia.createSession(newUser.id, {});
+    // const sessionCookie = lucia.createSessionCookie(session.id);
     // cookies().set(
     //   sessionCookie.name,
     //   sessionCookie.value,
