@@ -15,7 +15,7 @@ export default function InvoiceOrderPage() {
   useEffect(() => {
     async function getOrderDataHandler() {
       const getOrderDataServerAction = (
-        await import("@/actions/get-order-data")
+        await import("../../../../actions/get-order-data")
       ).default;
 
       const getOrder = await getOrderDataServerAction(params.orderId);
