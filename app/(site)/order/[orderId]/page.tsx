@@ -6,6 +6,8 @@ import { Suspense, useEffect, useState } from "react";
 import { CircleAlert } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 
+import getOrderData from "../../../../actions/get-order-data";
+
 import Link from "next/link";
 
 export default function InvoiceOrderPage() {
@@ -14,11 +16,7 @@ export default function InvoiceOrderPage() {
 
   useEffect(() => {
     async function getOrderDataHandler() {
-      const getOrderDataServerAction = (
-        await import("../../../../actions/get-order-data")
-      ).default;
-
-      const getOrder = await getOrderDataServerAction(params.orderId);
+      const getOrder = await getOrderData(params.orderId);
       if (!getOrder) setOrder(null);
       setOrder(getOrder);
     }
