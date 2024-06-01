@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { lucia } from "@/lib/lucia";
 import { redirect } from "next/navigation";
 import { ActionResult } from "@/lib/form";
+import { TimeSpan } from "oslo";
 
 export default async function signup(_: any, formData: FormData): Promise<ActionResult> {
     "use server";
@@ -46,8 +47,25 @@ export default async function signup(_: any, formData: FormData): Promise<Action
           codePoints : 0,
         },
       });
+
+    //   const session = await lucia.createSession(newUser.id, {});
+      const timespan = new TimeSpan(30, "d")
+      const expiresAt = new Date(Date.now() + timespan.milliseconds())
+
+      const newSession = await client.session.create({
+        data : {
+            userId : newUser.id,
+            expiresAt : expiresAt
+        }
+      })
+
+      const session = {
+        id: newSession.id,
+        userId : newUser.id,
+        fresh: true,
+        expiresAt: expiresAt,
+    };
   
-      const session = await lucia.createSession(newUser.id, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
       cookies().set(
         sessionCookie.name,
