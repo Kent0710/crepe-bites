@@ -41,9 +41,6 @@ export default async function signup(_: any, formData: FormData): Promise<Action
         data: {
           username: username,
           password: hashedPassword,
-          orderCode : "",
-          codeAttempts : 0,
-          codeExpiration : d,
           codePoints : 0,
         },
       });

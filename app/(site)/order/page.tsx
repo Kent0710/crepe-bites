@@ -7,9 +7,6 @@ import { ShoppingCart } from "lucide-react";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";8
 
-const SendCode = dynamic(() => import("../components/send-code"), { ssr: false })
-const EmailCode = dynamic(() => import("../components/email-code"), { ssr: false })
-
 import { validateRequest } from "@/lib/lucia";
 import { ActionResult, Form } from "@/lib/form";
 
