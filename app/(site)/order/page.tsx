@@ -86,7 +86,7 @@ export default async function OrderPage() {
                 id="message"
                 name="message"
                 className="resize-none border-2 border-neutral-200 px-4 py-2 focus:outline-none"
-                placeholder="youremail@gmail.com"
+                placeholder="your message here..."
               />
             </div>
             <div className="flex gap-3 items-center">

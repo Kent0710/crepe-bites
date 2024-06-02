@@ -60,13 +60,6 @@ export default async function ContactPage() {
               text="Send form"
               loadingText="Sending message..."
             />
-            {/* <button
-              type="submit"
-              className="flex w-full justify-center items-center font-semibold gap-3 bg-yellow-400 text-navy  px-10 py-2"
-            >
-              <Send className="w-4" />
-              Send form
-            </button> */}
           </Form>
           <div className="flex flex-col gap-6">
             <section>
