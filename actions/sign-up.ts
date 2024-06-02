@@ -42,6 +42,7 @@ export default async function signup(_: any, formData: FormData): Promise<Action
           username: username,
           password: hashedPassword,
           codePoints : 0,
+          alreadyRedeem : false
         },
       });
 

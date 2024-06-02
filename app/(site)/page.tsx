@@ -3,8 +3,8 @@
 // navy - [#161821]
 
 import Image from "next/image";
-import crepebitesbackdrop from "@/public/crepebitesbackdrop.jpg";
 import crepebiteslogo from "@/public/crepebiteslogo.jpg";
+import crepebitesproduct from "@/public/crepebitesproduct.jpg"
 import conceptImage from "@/public/conceptimage.png"
 import goalImage from "@/public/goalImage.png"
 import teamImage from "@/public/teamImage.png"
@@ -79,8 +79,8 @@ export default async function App() {
             <p className="text-center">Exclusive PHP 35.00 only if you order through our website. Save PHP 5.00!</p>
           </section>
           <Image
-            src={crepebitesbackdrop}
-            alt="crepebitesbackdrop"
+            src={crepebitesproduct}
+            alt="crepebitesproduct"
             width={500}
           />
         </section>

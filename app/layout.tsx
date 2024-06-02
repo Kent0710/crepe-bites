@@ -15,7 +15,11 @@ const kanit = Kanit({ weight: ["300"], subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Crepe Bites",
   description: "Crepe Bites Company Official Website",
-
+  openGraph : {
+    images : [
+      
+    ]
+  }
 };
 
 export default async function RootLayout({

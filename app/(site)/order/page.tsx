@@ -1,5 +1,5 @@
 import Image from "next/image";
-import crepebitesbackdrop from "@/public/crepebitesbackdrop.jpg";
+import crepebitesbox from "@/public/crepebitesbox.jpg"
 
 import { Suspense } from "react";
 
@@ -29,8 +29,8 @@ export default async function OrderPage() {
           </section>
           <section className="flex gap-3 items-center border-t-2 border-chocolate pt-6">
             <Image
-              src={crepebitesbackdrop}
-              alt="crepebitesbackdrop"
+              src={crepebitesbox}
+              alt="crepebitesbox"
               width={50}
             />
             <section>
