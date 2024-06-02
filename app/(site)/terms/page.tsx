@@ -103,9 +103,8 @@ const OrdersAndPayments = () => {
       <p className="text-justify">
         To place an order, follow the instructions on our website. We only
         accept cash on the counter payment method or points redemption as
-        detailed at checkout. Once an order is placed, you will receive a
-        confirmation email. Orders may be canceled under specific conditions
-        outlined in our cancellation policy.
+        detailed at checkout. Once an order is placed, you will receive an
+        invoice. There are no order cancellations from the website.
       </p>
     </TableOfContentsHeader>
   );

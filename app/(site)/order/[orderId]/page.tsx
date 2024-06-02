@@ -34,7 +34,7 @@ export default function InvoiceOrderPage() {
             </h1>
             <p>
               Please take a screenshot of this and present it to the counter on
-              claiming. The PHP 40.00 payment will also be settled at the venue.
+              claiming. The PHP 35.00 payment will also be settled at the venue.
             </p>
           </section>
           <div className="flex flex-col items-center">
@@ -57,10 +57,10 @@ export default function InvoiceOrderPage() {
               <CircleAlert className="w-4" />
               <p className="font-semibold text-xl">Reminders.</p>
             </div>
-            <li>Claim your order at NU Lipa 6th Floor Gymnasium.</li>
+            <li>Claim your order at NU Lipa 5th Student Lounge.</li>
             <li>Settle the payment at the venue.</li>
             <li>
-              Show up within 30 minutes from your set time{" "}
+              Show up within 20 minutes from your set time{" "}
               {order?.claimTime.toString()}. Failure to do so will result in
               void order.
             </li>

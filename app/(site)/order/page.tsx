@@ -1,13 +1,15 @@
 import Image from "next/image";
 import crepebitesbackdrop from "@/public/crepebitesbackdrop.jpg";
 
-import { Suspense } from "react";8
-import { ShoppingCart } from "lucide-react";
+import { Suspense } from "react";
 
-import { redirect } from "next/navigation";8
+import { redirect } from "next/navigation";
+import dynamic from "next/dynamic";
 
 import { validateRequest } from "@/lib/lucia";
 import { ActionResult, Form } from "@/lib/form";
+
+const SubmitButton = dynamic(() => import("../components/button"), {ssr : false})
 
 export default async function OrderPage() {
   const { user, session } = await validateRequest();
@@ -37,6 +39,9 @@ export default async function OrderPage() {
                 A malunggay crepe infused with mango jam filling and a drizzle
                 of chocolate syrup.
               </p>
+              <p>
+                Price: PHP 35.00 (only on our website)
+              </p>
             </section>
           </section>
           <Form 
@@ -54,7 +59,7 @@ export default async function OrderPage() {
               <p>Please fill out this form with necessary information.</p>
             </section>
             <div className="flex flex-col gap-1">
-              <p className="font-semibold">Grade and Section</p>
+              <p className="font-semibold">Grade and Section or Department</p>
               <input
                 type="text"
                 name="section"
@@ -88,16 +93,16 @@ export default async function OrderPage() {
               <input type="checkbox" className="" name="useCodePoints" id="useCodePoints"  />
               <p>
                 Use <span className="text-blue-500 underline">code points</span>{" "}
-                on check out.
+                on check out. <span className="text-blue-500 font-semibold">Available points: 1</span> 
               </p>
             </div>
-            <button
-              type="submit"
+            <p>Gain 1 point per check out. Accumulate a total of 5 points for a free box then toggle the checkbox above.</p>
+            <SubmitButton 
               className="w-full flex items-center justify-center gap-3 py-2 border-2 border-chocolate"
-            >
-              <ShoppingCart className="w-4" />
-              Create invoice
-            </button>
+              type="submit"
+              text="Create invoice"
+              loadingText="Creating invoice..."
+            />
           </Form>
         </div>
       </div>

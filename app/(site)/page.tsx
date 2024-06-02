@@ -41,7 +41,7 @@ export default async function App() {
       <div className="flex flex-col gap-6 items-center text-white bg-[#161821] h-fit py-6 pt-24 text-sm shadow-2xl">
         <section className="px-10 flex justify-center items-center pb-14 h-fit gap-14 md:gap-24 flex-wrap shadow-2xl shadow-black">
           <section>
-            <h1 className="text-7xl">
+            <h1 className="text-7xl text-center">
               Crepe it
               <span className="text-yellow-300 font-semibold drop-shadow-glow">
                 {" "}
@@ -76,6 +76,7 @@ export default async function App() {
               </Link>{" "}
               a code.
             </p>
+            <p className="text-center">Exclusive PHP 35.00 only if you order through our website. Save PHP 5.00!</p>
           </section>
           <Image
             src={crepebitesbackdrop}

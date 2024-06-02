@@ -10,7 +10,7 @@ export default async function createInvoice(
   userId: string,
   formData: FormData
 ) {
-  let newOrder;
+  let newOrder, updateRedeem;
 
   try {
     // get the user
@@ -63,21 +63,32 @@ export default async function createInvoice(
     const orderNumber = generateRandomString(4,alphabet("0-9"));
 
     // create to the database
-    newOrder = await client.order.create({
-      data: {
-        claimTime: isoDateTime,
-        message: rawFormData.message.toString(),
-        section : rawFormData.section,
-        orderNumber: parseInt(orderNumber),
-        userId: userId,
-        useCodePoints: useCodePoints,
-      },
-    });
+    [newOrder, updateRedeem] = await client.$transaction([
+      client.order.create({
+        data: {
+          claimTime: isoDateTime,
+          message: rawFormData.message.toString(),
+          section: rawFormData.section,
+          orderNumber: parseInt(orderNumber),
+          userId: userId,
+          useCodePoints: useCodePoints,
+        },
+      }),
+      client.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          alreadyRedeem: true,
+        },
+      }),
+    ]);
   } catch (e) {
     return {
       error:
         "Unknown error occured. Please see your history if the order succeeded. If not, please refresh the page and try again.",
     };
   }
-  redirect(`/order/${newOrder?.id}`);
+
+  redirect(`/order/${newOrder.id}`);
 }

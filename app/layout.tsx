@@ -31,10 +31,6 @@ export default async function RootLayout({
       href: "/order",
     },
     {
-      text: "Redeem",
-      href: "/redeem",
-    },
-    {
       text: "History",
       href: "/history",
     },
@@ -80,7 +76,7 @@ export default async function RootLayout({
             </ul>
           </section>
           <section className="flex gap-6 items-center">
-            <p className="font-semibold text-sm bg-gradient-to-tr from-amber-200 to-yellow-500 bg-clip-text text-transparent"> Hello, {sessionData.user?.username} </p>
+            <p className="font-semibold text-sm bg-gradient-to-tr from-amber-200 to-yellow-500 bg-clip-text text-transparent truncate"> Hello, {sessionData.user?.username} </p>
             <AuthButton />
             <MenuToggle />
           </section>

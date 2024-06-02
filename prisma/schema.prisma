@@ -20,6 +20,7 @@ model User {
   password String
   order    Order[]
 
+  alreadyRedeem Boolean
   codePoints Int
 
   inbox Message[]

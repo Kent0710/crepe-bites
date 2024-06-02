@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import { ActionResult, Form } from "@/lib/form";
 import { validateRequest } from "@/lib/lucia";
 
+import SubmitButton from "../components/button";
+
 export default async function ContactPage() {
   const {user} = await validateRequest();
   
@@ -52,13 +54,19 @@ export default async function ContactPage() {
                 className="resize-none w-full px-4 py-2 rounded-md focus:outline-none"
               />
             </div>
-            <button
+            <SubmitButton 
+              type="submit"
+              className="flex w-full justify-center items-center font-semibold gap-3 bg-yellow-400 text-navy  px-10 py-2"
+              text="Send form"
+              loadingText="Sending message..."
+            />
+            {/* <button
               type="submit"
               className="flex w-full justify-center items-center font-semibold gap-3 bg-yellow-400 text-navy  px-10 py-2"
             >
               <Send className="w-4" />
               Send form
-            </button>
+            </button> */}
           </Form>
           <div className="flex flex-col gap-6">
             <section>
