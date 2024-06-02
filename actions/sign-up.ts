@@ -75,6 +75,6 @@ export default async function signup(_: any, formData: FormData): Promise<Action
         error: "An unknown error occurred.",
       };
     }
-    return redirect("/");
+    redirect("/");
   }
   

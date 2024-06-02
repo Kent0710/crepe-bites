@@ -1,15 +1,9 @@
 import Link from "next/link";
 
-import db from "@/lib/db";
-import { Argon2id } from "oslo/password";
-import { cookies } from "next/headers";
-import { lucia } from "@/lib/lucia";
-import { redirect } from "next/navigation";
 import { Form } from "@/lib/form";
+import { ActionResult } from "@/lib/form";
 
-import type { DatabaseUser } from "@/lib/db";
-import type { ActionResult } from "@/lib/form";
-import client from "@/lib/db";
+import SubmitButton from "../components/button";
 
 export default async function SignInPage() {
   return (
@@ -19,7 +13,19 @@ export default async function SignInPage() {
           <h1 className="font-semibold text-2xl">Sign In</h1>
           <p>Welcome back! Ready to make another purchase?</p>
         </section>
-        <Form action={login} className="flex flex-col gap-3 w-full">
+        <Form
+          action={async (
+            prevState: any,
+            formData: FormData
+          ): Promise<ActionResult> => {
+            "use server";
+            const signInServerAction = (
+              await import("../../../actions/sign-in")
+            ).default;
+            return await signInServerAction(prevState, formData);
+          }}
+          className="flex flex-col gap-3 w-full"
+        >
           <section>
             <p className="font-semibold">Username</p>
             <input
@@ -38,12 +44,11 @@ export default async function SignInPage() {
               className="border-2 border-neutral-200 w-full px-4 py-2 focus:outline-none"
             />
           </section>
-          <button
+          <SubmitButton
             type="submit"
+            text="Submit"
             className="w-full flex items-center justify-center gap-3 py-2 border-2 border-chocolate"
-          >
-            Proceed
-          </button>
+          />
           <p>
             Already have an account?{" "}
             <Link href="/signUp" className="text-blue-500 underline">
@@ -66,61 +71,4 @@ export default async function SignInPage() {
       </div>
     </div>
   );
-}
-
-async function login(_: any, formData: FormData): Promise<ActionResult> {
-  "use server";
-  const username = formData.get("username");
-  if (
-    typeof username !== "string" ||
-    username.length < 3 ||
-    username.length > 31 ||
-    !/^[a-z0-9_-]+$/.test(username)
-  ) {
-    return {
-      error: "Invalid username",
-    };
-  }
-  const password = formData.get("password");
-  if (
-    typeof password !== "string" ||
-    password.length < 6 ||
-    password.length > 255
-  ) {
-    return {
-      error: "Invalid password",
-    };
-  }
-
-  // check if the user exists in the database
-  const existingUser = await client.user.findUnique({
-    where: {
-      username: username,
-    },
-  });
-
-  if (!existingUser) {
-    return {
-      error: "Incorrect username or password",
-    };
-  }
-
-  const validPassword = await new Argon2id().verify(
-    existingUser.password,
-    password
-  );
-  if (!validPassword) {
-    return {
-      error: "Incorrect username or password",
-    };
-  }
-
-  const session = await lucia.createSession(existingUser.id, {});
-  const sessionCookie = lucia.createSessionCookie(session.id);
-  cookies().set(
-    sessionCookie.name,
-    sessionCookie.value,
-    sessionCookie.attributes
-  );
-  return redirect("/");
 }

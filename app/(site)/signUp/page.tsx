@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Form } from "@/lib/form";
-
-import signup from "@/actions/sign-up";
+import { ActionResult } from "@/lib/form";
 
 import SubmitButton from "../components/button";
 
@@ -16,7 +15,19 @@ export default async function SignUpPage() {
             <span className="text-blue-500 underline">store</span> your data.
           </p>
         </section>
-        <Form action={signup} className="flex flex-col gap-3 w-full">
+        <Form
+          action={async (
+            prevState: any,
+            formData: FormData
+          ): Promise<ActionResult> => {
+            "use server";
+            const signUpServerAction = (
+              await import("../../../actions/sign-up")
+            ).default;
+            return await signUpServerAction(prevState, formData);
+          }}
+          className="flex flex-col gap-3 w-full"
+        >
           <section>
             <p className="font-semibold">Username</p>
             <input
