@@ -3,6 +3,8 @@ import { Form } from "@/lib/form";
 
 import signup from "@/actions/sign-up";
 
+import SubmitButton from "../components/button";
+
 export default async function SignUpPage() {
   return (
     <div className="flex flex-col items-center pt-20 py-5  md:px-36 text-sm text-chocolate">
@@ -34,12 +36,11 @@ export default async function SignUpPage() {
               placeholder="6 characters and above"
             />
           </section>
-          <button
+          <SubmitButton
             type="submit"
+            text="Submit"
             className="w-full flex items-center justify-center gap-3 py-2 border-2 border-chocolate"
-          >
-            Create
-          </button>
+          />
           <p>
             Already have an account?{" "}
             <Link href="/signIn" className="text-blue-500 underline">
