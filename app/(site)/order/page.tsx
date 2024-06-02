@@ -93,7 +93,7 @@ export default async function OrderPage() {
               <input type="checkbox" className="" name="useCodePoints" id="useCodePoints"  />
               <p>
                 Use <span className="text-blue-500 underline">code points</span>{" "}
-                on check out. <span className="text-blue-500 font-semibold">Available points: 1</span> 
+                on check out. <span className="text-blue-500 font-semibold">Available points: {user.codePoints} </span> 
               </p>
             </div>
             <p>Gain 1 point per check out. Accumulate a total of 5 points for a free box then toggle the checkbox above.</p>

@@ -30,16 +30,21 @@ export default async function createInvoice(
     const rawUseCodePoints = formData.get("useCodePoints");
     const useCodePoints = rawUseCodePoints === "on" ? true : false;
     if (useCodePoints && user.codePoints !== 5) {
-        return {
-          error: "Not enough points.",
-      }
+      return {
+        error: "Not enough points.",
+      };
+    }
+
+    let redeem = false;
+    if (useCodePoints && user.codePoints === 5) {
+      redeem = true;
     }
 
     // everything is good
     const rawFormData = {
       time: formData.get("orderDateTime"),
       message: formData.get("message") || "",
-      section : formData.get("section")
+      section: formData.get("section"),
     };
 
     if (!rawFormData.time) {
@@ -48,41 +53,67 @@ export default async function createInvoice(
       };
     }
 
-    if (typeof rawFormData.section !== "string" || 
-      rawFormData.section === undefined || rawFormData.section === "" 
+    if (
+      typeof rawFormData.section !== "string" ||
+      rawFormData.section === undefined ||
+      rawFormData.section === ""
     ) {
       return {
-        error : "Invalid section"
-      }
+        error: "Invalid section",
+      };
     }
 
     // format the date
     const currentDate = new Date().toISOString().split("T")[0];
     const isoDateTime = `${currentDate}T${rawFormData.time}:00Z`;
 
-    const orderNumber = generateRandomString(4,alphabet("0-9"));
+    const orderNumber = generateRandomString(4, alphabet("0-9"));
 
-    // create to the database
-    [newOrder, updateRedeem] = await client.$transaction([
-      client.order.create({
-        data: {
-          claimTime: isoDateTime,
-          message: rawFormData.message.toString(),
-          section: rawFormData.section,
-          orderNumber: parseInt(orderNumber),
-          userId: userId,
-          useCodePoints: useCodePoints,
-        },
-      }),
-      client.user.update({
-        where: {
-          id: userId,
-        },
-        data: {
-          alreadyRedeem: true,
-        },
-      }),
-    ]);
+    if (redeem) {
+      [newOrder, updateRedeem] = await client.$transaction([
+        client.order.create({
+          data: {
+            claimTime: isoDateTime,
+            message: rawFormData.message.toString(),
+            section: rawFormData.section,
+            orderNumber: parseInt(orderNumber),
+            userId: userId,
+            useCodePoints: useCodePoints,
+          },
+        }),
+        client.user.update({
+          where: {
+            id: userId,
+          },
+          data: {
+            alreadyRedeem: true,
+          },
+        }),
+      ]);
+    } else {
+      [newOrder, updateRedeem] = await client.$transaction([
+        client.order.create({
+          data: {
+            claimTime: isoDateTime,
+            message: rawFormData.message.toString(),
+            section: rawFormData.section,
+            orderNumber: parseInt(orderNumber),
+            userId: userId,
+            useCodePoints: useCodePoints,
+          },
+        }),
+        client.user.update({
+          where: {
+            id: userId,
+          },
+          data: {
+            codePoints : {
+              increment : 1,
+            }
+          },
+        }),
+      ]);
+    }
   } catch (e) {
     return {
       error:
