@@ -70,14 +70,13 @@ export default async function OrderPage() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <p className="font-semibold">Time</p>
+              <p className="font-semibold">Time to claim (claim within 10 minutes from your set time) </p>
               <input
                 type="time"
                 name="orderDateTime"
                 required={true}
                 id="orderDateTime"
                 className="border-2 border-neutral-200 w-full px-4 py-2 focus:outline-none"
-                placeholder="youremail@gmail.com"
               />
             </div>
             <div className="flex flex-col gap-1">
