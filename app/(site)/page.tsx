@@ -69,7 +69,7 @@ export default async function App() {
               <MousePointerClick className="w-4 shrink-0" />
               Order Now
             </Link>
-            <p className="text-center">Exclusive PHP 35.00 only if you order through our website. Save PHP 5.00!</p>
+            <p className="text-center mt-3">Exclusive PHP 35.00 only if you order through our website. Save PHP 5.00!</p>
           </section>
           <Image
             src={crepebitesproduct}
