@@ -35,10 +35,18 @@ export default async function createInvoice(
       };
     }
 
+    if (useCodePoints && user.alreadyRedeem) {
+      return {
+        error : "Free box already redeemed."
+      }
+    }
+
     let redeem = false;
     if (useCodePoints && user.codePoints === 5) {
       redeem = true;
     }
+
+
 
     // everything is good
     const rawFormData = {
