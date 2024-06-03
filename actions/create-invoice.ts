@@ -37,7 +37,7 @@ export default async function createInvoice(
 
     if (useCodePoints && user.alreadyRedeem) {
       return {
-        error : "Free box already redeemed."
+        error : "Free box already redeemed. Please do not toggle the use code points"
       }
     }
 
@@ -45,8 +45,6 @@ export default async function createInvoice(
     if (useCodePoints && user.codePoints === 5) {
       redeem = true;
     }
-
-
 
     // everything is good
     const rawFormData = {
