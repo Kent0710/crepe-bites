@@ -1,5 +1,5 @@
 import Image from "next/image";
-import crepebitesbox from "@/public/crepebitesbox.jpg"
+import crepebitesbox from "@/public/crepebitesbox.jpg";
 
 import { Suspense } from "react";
 
@@ -9,12 +9,14 @@ import dynamic from "next/dynamic";
 import { validateRequest } from "@/lib/lucia";
 import { ActionResult, Form } from "@/lib/form";
 
-const SubmitButton = dynamic(() => import("../components/button"), {ssr : false})
+const SubmitButton = dynamic(() => import("../components/button"), {
+  ssr: false,
+});
 
 export default async function OrderPage() {
   const { user, session } = await validateRequest();
   if (!session) {
-    redirect("/signUp")
+    redirect("/signUp");
   }
 
   return (
@@ -28,32 +30,30 @@ export default async function OrderPage() {
             <p>Before checking out, please review our terms and conditions.</p>
           </section>
           <section className="flex gap-3 items-center border-t-2 border-chocolate pt-6">
-            <Image
-              src={crepebitesbox}
-              alt="crepebitesbox"
-              width={50}
-            />
+            <Image src={crepebitesbox} alt="crepebitesbox" width={50} />
             <section>
               <h4 className="text-xl font-semibold">Fruipe</h4>
               <p>
                 A malunggay crepe infused with mango jam filling and a drizzle
                 of chocolate syrup.
               </p>
-              <p>
-                Price: PHP 35.00 (only on our website)
-              </p>
+              <p>Price: PHP 35.00 (only on our website)</p>
             </section>
           </section>
-          <Form 
-            className="flex flex-col gap-3" 
+          <Form
+            className="flex flex-col gap-3"
             action={async (
               prevState: any,
               formData: FormData
-            ) : Promise<ActionResult> => {
-              'use server'
-              const createInvoiceServerAction = (await import('../../../actions/create-invoice')).default;
-              return await createInvoiceServerAction(prevState, user.id, formData);
-          }}>
+            ): Promise<ActionResult> => {
+              "use server";
+              return {
+                error: "Sold out. Thank you Nationalian!",
+              };
+              // const createInvoiceServerAction = (await import('../../../actions/create-invoice')).default;
+              // return await createInvoiceServerAction(prevState, user.id, formData);
+            }}
+          >
             <section>
               <h4 className="text-xl font-semibold">Check out form</h4>
               <p>Please fill out this form with necessary information.</p>
@@ -89,14 +89,25 @@ export default async function OrderPage() {
               />
             </div>
             <div className="flex gap-3 items-center">
-              <input type="checkbox" className="" name="useCodePoints" id="useCodePoints"  />
+              <input
+                type="checkbox"
+                className=""
+                name="useCodePoints"
+                id="useCodePoints"
+              />
               <p>
                 Use <span className="text-blue-500 underline">code points</span>{" "}
-                on check out. <span className="text-blue-500 font-semibold">Available points: {user.codePoints} </span> 
+                on check out.{" "}
+                <span className="text-blue-500 font-semibold">
+                  Available points: {user.codePoints}{" "}
+                </span>
               </p>
             </div>
-            <p>Gain 1 point per check out. Accumulate a total of 5 points for a free box then toggle the checkbox above.</p>
-            <SubmitButton 
+            <p>
+              Gain 1 point per check out. Accumulate a total of 5 points for a
+              free box then toggle the checkbox above.
+            </p>
+            <SubmitButton
               className="w-full flex items-center justify-center gap-3 py-2 border-2 border-chocolate"
               type="submit"
               text="Create invoice"
