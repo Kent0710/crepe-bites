@@ -59,11 +59,6 @@ export default function InvoiceOrderPage() {
             </div>
             <li>Claim your order at NU Lipa 5th Student Lounge.</li>
             <li>Settle the payment at the venue.</li>
-            <li>
-              Show up within 10 minutes from your set time{" "}
-              {order?.claimTime.toString()}. Failure to do so will result in
-              void order.
-            </li>
             <li>Message us at crepebites@gmail.com for any concerns.</li>
           </ul>
         </div>

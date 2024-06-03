@@ -70,7 +70,7 @@ export default async function OrderPage() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <p className="font-semibold">Time to claim (claim within 10 minutes from your set time) </p>
+              <p className="font-semibold">Time to claim</p>
               <input
                 type="time"
                 name="orderDateTime"
