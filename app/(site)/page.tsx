@@ -4,11 +4,11 @@
 
 import Image from "next/image";
 import crepebiteslogo from "@/public/crepebiteslogo.jpg";
-import crepebitesproduct from "@/public/crepebitesproduct.jpg"
-import conceptImage from "@/public/conceptimage.png"
-import goalImage from "@/public/goalImage.png"
-import teamImage from "@/public/teamImage.png"
-import kentImage from "@/public/kentImage.png"
+import crepebitesproduct from "@/public/crepebitesproduct.jpg";
+import conceptImage from "@/public/conceptimage.png";
+import goalImage from "@/public/goalImage.png";
+import teamImage from "@/public/teamImage.png";
+import kentImage from "@/public/kentImage.png";
 
 import { LogIn } from "lucide-react";
 import { Facebook } from "lucide-react";
@@ -41,6 +41,10 @@ export default async function App() {
       <div className="flex flex-col gap-6 items-center text-white bg-[#161821] h-fit py-6 pt-24 text-sm shadow-2xl">
         <section className="px-10 flex justify-center items-center pb-14 h-fit gap-14 md:gap-24 flex-wrap shadow-2xl shadow-black">
           <section>
+            <p className="text-blue-500 font-semibold">
+              Sold out. All orders starting from 11:00am will be void.
+              Site is shutting down at exactly 8:00pm. Thank you Nationalians!
+            </p>
             <h1 className="text-7xl text-center">
               Crepe it
               <span className="text-yellow-300 font-semibold drop-shadow-glow">
@@ -69,13 +73,12 @@ export default async function App() {
               <MousePointerClick className="w-4 shrink-0" />
               Order Now
             </Link>
-            <p className="text-center mt-3">Exclusive PHP 35.00 only if you order through our website. Save PHP 5.00!</p>
+            <p className="text-center mt-3">
+              Exclusive PHP 35.00 only if you order through our website. Save
+              PHP 5.00!
+            </p>
           </section>
-          <Image
-            src={crepebitesproduct}
-            alt="crepebitesproduct"
-            width={500}
-          />
+          <Image src={crepebitesproduct} alt="crepebitesproduct" width={500} />
         </section>
         <div className="flex items-center gap-3 px-10 text-neutral-400 justify-between w-screen">
           <section className="flex">
@@ -147,19 +150,20 @@ export default async function App() {
               </section>
             </section>
             <section className="w-80 flex flex-col gap-3 items-center">
-              <Image src={goalImage} alt="goalImage"  width={300} />
+              <Image src={goalImage} alt="goalImage" width={300} />
               <section>
                 <h4 className="text-2xl font-semibold">Our goal</h4>
                 <p className="text-justify">
-                  Our goal is to produce and market delicious crepes, make it accessible and
-                  affordable to everyone. We aim to bring the joy of sweet and
-                  healthy treats to the community, creating a new standard in
-                  the dessert market with our innovative, affordable and tasty creations.
+                  Our goal is to produce and market delicious crepes, make it
+                  accessible and affordable to everyone. We aim to bring the joy
+                  of sweet and healthy treats to the community, creating a new
+                  standard in the dessert market with our innovative, affordable
+                  and tasty creations.
                 </p>
               </section>
             </section>
             <section className="w-80 flex flex-col gap-3 items-center">
-              <Image src={teamImage} alt="teamImage"  width={300} />
+              <Image src={teamImage} alt="teamImage" width={300} />
               <section>
                 <h4 className="text-2xl font-semibold">Our team</h4>
                 <p className="text-justify">
@@ -185,10 +189,26 @@ export default async function App() {
             </p>
           </section>
           <ul className="flex justify-center gap-6 md:gap-14 flex-wrap">
-            <UniqueFeatureItem icon={HandCoins} title="Ready to go" description="Whether you are rushing to catch the bus or simply need a quick pick-me-up, our crepes are the perfect on-the-go snack." />
-            <UniqueFeatureItem icon={CheckCheck} title="Affordable" description="We have made it our mission to keep our crepes affordable without compromising on quality or taste."/>
-            <UniqueFeatureItem icon={Cross} title="Sweetness" description="Each ingredient is thoughtfully selected and combined to create a harmonious blend of flavors and balanced sweetness." />
-            <UniqueFeatureItem icon={Smile} title="Healthy" description="From the malunggay leaves to the freshly made fruit jam filling, our crepes is designed to satisfy your health and cravings." />
+            <UniqueFeatureItem
+              icon={HandCoins}
+              title="Ready to go"
+              description="Whether you are rushing to catch the bus or simply need a quick pick-me-up, our crepes are the perfect on-the-go snack."
+            />
+            <UniqueFeatureItem
+              icon={CheckCheck}
+              title="Affordable"
+              description="We have made it our mission to keep our crepes affordable without compromising on quality or taste."
+            />
+            <UniqueFeatureItem
+              icon={Cross}
+              title="Sweetness"
+              description="Each ingredient is thoughtfully selected and combined to create a harmonious blend of flavors and balanced sweetness."
+            />
+            <UniqueFeatureItem
+              icon={Smile}
+              title="Healthy"
+              description="From the malunggay leaves to the freshly made fruit jam filling, our crepes is designed to satisfy your health and cravings."
+            />
           </ul>
         </div>
         <div className="px-36 flex flex-col gap-6">
@@ -206,7 +226,9 @@ export default async function App() {
               <div className="flex gap-3 items-center">
                 <Github size={30} />
                 <section>
-                  <h4 className="text-xl font-semibold">Christian Kent Bayani</h4>
+                  <h4 className="text-xl font-semibold">
+                    Christian Kent Bayani
+                  </h4>
                   <p className="underline">https://github.com/Kent0710</p>
                 </section>
               </div>
@@ -292,14 +314,14 @@ export default async function App() {
 
 interface UniqueFeatureItemProps {
   icon: any;
-  title : string;
-  description : string;
+  title: string;
+  description: string;
 }
 
 const UniqueFeatureItem: React.FC<UniqueFeatureItemProps> = ({
   icon: Icon,
   title,
-  description
+  description,
 }) => {
   return (
     <li className="items-center border-2 border-white text-white px-10 p-5 w-60">
@@ -307,9 +329,7 @@ const UniqueFeatureItem: React.FC<UniqueFeatureItemProps> = ({
         <Icon className="text-yellow-400 w-[15rem] h-[15rem] absolute opacity-20" />
         <p className="text-lg font-semibold text-yellow-400"> {title} </p>
       </section>
-      <p className="text-justify">
-        {description}
-      </p>
+      <p className="text-justify">{description}</p>
     </li>
   );
 };
